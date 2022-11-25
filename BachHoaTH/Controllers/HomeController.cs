@@ -84,7 +84,7 @@ namespace BachHoaTH.Controllers
 
         [HttpGet]
         [Route("/api/getimgs/{id?}")]
-        public async Task<IActionResult> getImgs(int? id)
+        public IActionResult getImgs(int? id)
         {
             List<Image> lsImages = _context.Images
              .AsNoTracking()

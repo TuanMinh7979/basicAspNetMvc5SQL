@@ -101,7 +101,7 @@ namespace BachHoaTH.Controllers
 
         [HttpPost]
         [Route("/api/checkout/details")]
-        public async Task<IActionResult> DetailsAsync(int? id)
+        public  IActionResult DetailsAsync(int? id)
         {
             if(id == null)
             {

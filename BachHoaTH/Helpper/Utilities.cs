@@ -163,6 +163,7 @@ namespace BachHoaTH.Helpper
             }
             catch (Exception ex)
             {
+                Debug.WriteLine(ex);
                 return null;
             }
         }

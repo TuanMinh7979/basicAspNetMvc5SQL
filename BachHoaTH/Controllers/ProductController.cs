@@ -34,13 +34,13 @@ namespace BachHoaTH.Controllers
 
         [HttpPost]
         [Route("shop", Name = "ShopProductPost")]
-        public IActionResult Index(string? search, int? catId)
+        public IActionResult Index(string search, int? catId)
         {
             Debug.WriteLine("--------------POST HERE----");
             Debug.WriteLine(search);
             Debug.WriteLine(catId);
             List<Product> ls = new List<Product>();
-            if (!String.IsNullOrEmpty(search) && catId!=null)
+            if (!String.IsNullOrEmpty(search) && catId!=null )
             {
                 ls = _context.Products.AsNoTracking()
                      .Where(x => x.CatId == catId && x.ProductName.Contains(search) == true)
@@ -125,7 +125,7 @@ ViewBag.searchVal =search ;
 
         [HttpGet]
         [Route("/api/products/all")]
-        public async Task<IActionResult> getAllProductApi()
+        public IActionResult getAllProductApi()
         {
 
             var lsProducts = _context.Products
@@ -138,7 +138,7 @@ ViewBag.searchVal =search ;
 
         [HttpGet]
         [Route("/api/products/getSearchByNameCnt")]
-        public async Task<IActionResult> getSearchByNameCnt(string name)
+        public IActionResult getSearchByNameCnt(string name)
         {
 
             var lsProducts = _context.Products

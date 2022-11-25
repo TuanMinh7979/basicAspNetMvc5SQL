@@ -20,7 +20,7 @@ namespace BachHoaTH.Areas.Admin.Controllers
         }
 
         // GET: Admin/AdminAccounts
-        public async Task<IActionResult> Index(int page = 1)
+        public IActionResult Index(int page = 1)
         {
             //lấy ra danh sách--> hiển thị
             ViewData["TrangThai"] = new SelectList(_context.TransactStatuses, "TransactStatusId", "Status");
