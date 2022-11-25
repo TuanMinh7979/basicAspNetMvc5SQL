@@ -1,0 +1,132 @@
+﻿@model BachHoaTH.Models.TinDang
+
+@{
+    ViewData["Title"] = Model.Title;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="AdminTinDangs" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminTinDangs" asp-action="Index">Danh sách tin</a>
+            <span class="breadcrumb-item active">@Model.Title</span>
+        </nav>
+    </div>
+</div>
+<div class="page-header no-gutters has-tab">
+    <div class="d-md-flex m-b-15 align-items-center justify-content-between">
+        <div class="media align-items-center m-b-15">
+            <div class="avatar ava-image rounded" style="height:70px; width:70px">
+                <img width="200" height="200" src="~/images/news/@Model.Thumb" alt="@Model.Title" />
+            </div>
+            <div class="m-l-15">
+                <h4 class="m-b-0">@Model.Title</h4>
+                <p class="text-muted m-b-0">ID: #@Model.PostId</p>
+            </div>
+        </div>
+    </div>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#product-overview">OVERVIEW</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#product-images">NEWS IMAGES</a>
+        </li>
+    </ul>
+</div>
+<div class="container-fluid">
+    <div class="tab-content m-t-15">
+        <div class="tab-pane fade show active" id="product-overview">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">THÔNG TIN: @Model.Title.ToUpper()</h4>
+                    <div class="table-responsive">
+                        <table class="product-info-table m-t-20">
+                            <tbody>
+                                <tr>
+                                    <td>Page Name:</td>
+                                    <td class="text-dark font-weight-semibold">@Model.Title</td>
+                                </tr>
+                                <tr>
+                                    <td>Alias:</td>
+                                    <td class="text-dark">@Model.Alias</td>
+                                </tr>
+                                <tr>
+                                    <td>Trạng thái:</td>
+                                    <td>
+                                        <div class="check-box">
+                                            <input asp-for="Published" type="checkbox" />
+                                            <label for="Published">Public</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>IsNewfeed:</td>
+                                    <td>
+                                        <div class="check-box">
+                                            <input asp-for="IsNewfeed" type="checkbox" />
+                                            <label for="IsNewfeed">Public</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>IsHot:</td>
+                                    <td>
+                                        <div class="check-box">
+                                            <input asp-for="IsHot" type="checkbox" />
+                                            <label for="IsHot">Public</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">THÔNG TIN MÔ TẢ</h4>
+                </div>
+                <div class="card-body">
+                    @Html.Raw(Model.Contents)
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="product-images">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">HÌNH ẢNH</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <img class="img-fluid" src="~/images/news/@Model.Thumb" alt="@Model.Title" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/Adminassets/vendors/select2/select2.min.js"></script>
+    <script src="~/Adminassets/js/pages/e-commerce-product-edit.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script src="~/Adminassets/summernote/summernote-bs4.js"></script>
+
+    <script>
+        jQuery(document).ready(function () {
+            $('.summernote').summernote({
+                fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
+                styelTags: ['p', 'h1', 'h2', 'h3', 'h4', 'h5'],
+                height: 200,                 // set editor height
+                minHeight: null,             // set minimum height of editor
+                maxHeight: null,             // set maximum height of editor
+                focus: true                  // set focus to editable area after initializing summernote
+
+            });
+        });
+    </script>
+}

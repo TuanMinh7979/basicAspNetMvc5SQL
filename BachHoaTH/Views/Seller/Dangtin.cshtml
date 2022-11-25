@@ -1,0 +1,86 @@
+﻿@{
+    ViewData["Title"] = "Dang tin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+@section Styles {
+<link rel="stylesheet" href="~/css/Dangtin.css">
+}
+
+<!-- Begin Main Content Area -->
+<main class="main-content">
+    <div class="container col-12 row main-post">
+        <div class="col-3 post-image">
+            <div class="mb-2">Hình ảnh</div>
+            <div class="imgUp">
+                <div class="imagePreview"></div>
+                <label class="btn btn-primary">
+                    Upload<input type="file" class="uploadFile img" value="Upload Photo"
+                        style="width: 0px;height: 0px;overflow: hidden;">
+                </label>
+            </div><!-- col-2 -->
+            <i class="fa fa-plus imgAdd"></i>
+        </div>
+        <div class="col-9 post-content ">
+            <div class="mb-2">Thông tin chi tiết</div>
+
+
+            <div class="form-group">
+                <label class="form-label">Danh mục sản phẩm</label>
+                <input id="13" class="danhmucText" value="" type="text" placeholder="Chọn danh mục" disabled>
+            </div>
+
+            <div id="Ttct" style="padding: 20px 20px;">
+
+            </div>
+
+            <button id="dangtinBtn">ĐĂNG TIN</button>
+        </div>
+
+
+
+    </div>
+
+
+</main>
+
+
+<!-- Button trigger modal -->
+<!-- Button trigger modal -->
+<button id="startModelBtn" type="button" style="display:none" class="btn btn-primary" data-bs-toggle="modal"
+    data-bs-target="#exampleModalCenteredScrollable">
+    Vertically centered scrollable modal
+</button>
+
+<div class="modal fade show" id="exampleModalCenteredScrollable" tabindex="-1"
+    aria-labelledby="exampleModalCenteredScrollableTitle" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenteredScrollableTitle">Chọn danh mục</h5>
+                <a href="/" class="btn-close"></a>
+            </div>
+            <div class="modal-body">
+                <div id="selectCatUl">
+                    <div id="13">Xe máy</div>
+                    <div id="12"> Điện thoại</div>
+                    <div id="3">Laptop</div>
+                    <div id="9">Đồ gia dụng</div>
+                    <div id="4">Linh kiện</div>
+                    <div id="14">Giày</div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+@section Scripts {
+<script type="text/javascript" src="js/Dangtin.js"></script>
+}
+<!-- Main Content Area End Here -->

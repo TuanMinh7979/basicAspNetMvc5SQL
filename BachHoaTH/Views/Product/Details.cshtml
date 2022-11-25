@@ -1,0 +1,202 @@
+﻿@model BachHoaTH.Models.Product
+
+@{
+    ViewData["Title"] = Model.ProductName;
+    @* Layout = "~/Views/Shared/_Layout.cshtml"; *@
+    List<Product> lsProducts = ViewBag.SanPham;
+}
+
+@section Styles{
+
+<link rel="stylesheet" href="~/css/productDetail.css">
+
+
+}
+
+<!-- Begin Main Content Area  -->
+<main class="main-content container">
+
+    <div class="product-detail">
+        <div class="product-left">
+            <div class="product__photo">
+                <div class="photo-container">
+                    <div class="photo-main">
+                        <img class="img-full mainPhoto" src="~/images/products/@Model.Thumb" alt="@Model.Title">
+
+                    </div>
+
+                    <div class="photo-album">
+                        <div class="album-slider">
+                            @* <div class="album-slider__item" style="height: 60px; width: 60px">
+                                <img class=""
+                                    src="https://media.riverford.co.uk/images/512x512-df7968962d0b98e4b2034efbd8ae8ef2.jpg"
+                                    alt="" />
+
+                            </div> *@
+
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product__spec">
+                <div id="firstSection" class="specSection">
+                    <p style="font-size: 1.6rem">Thông số kỹ thuật</p>
+                    @* <div class="spec-table">
+                        <table class="spec-table">
+                        <tr>
+                        <td>
+                        <div class="tdContent"> <img class="iconTd"
+                        src="https://icons.veryicon.com/png/o/application/tmall-icon-library/brand-exclusive-1.png"
+                        alt=""><strong>Hãng xe</strong><span></span>
+                        </div>
+                        </td>
+                        <td>
+                        <div class="tdContent"> <img class="iconTd"
+                        src="https://icons.veryicon.com/png/o/application/tmall-icon-library/brand-exclusive-1.png"
+                        alt=""><strong>Dòng xe</strong><span></span>
+                        </div>
+                        </td>
+                        </tr>
+                        <tr>
+                        <td>
+                        <div class="tdContent"> <img class="iconTd"
+                        src="https://icons.veryicon.com/png/o/application/tmall-icon-library/brand-exclusive-1.png"
+                        alt=""><strong>Số Km đã đi</strong><span></span>
+                        </div>
+
+                        </td>
+                        <td>
+                        <div class="tdContent"> <img class="iconTd"
+                        src="https://icons.veryicon.com/png/o/application/tmall-icon-library/brand-exclusive-1.png"
+                        alt=""><strong>Hang xe</strong><span>Hon</span>
+                        </div>
+                        </td>
+
+                        </tr>
+                        </table>
+                        </div> *@
+                </div>
+                <hr />
+                <div class="specSection">
+                    <p style="font-size: 1.6rem">Mô tả </p>
+                    <div class="productMota">
+                        Bán xe 50cc 2020 chính chủ
+                        Xe sạch sẽ đẹp
+                        Xe đã làm máy 80cc êm như zin mạnh mượt
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="product-right">
+            <label>Danh mục: </label><span> <a href="/@Model.Cat.Alias">@Model.Cat.CatName</a></span>
+            <div class="title">
+                <h2>@(Model.ProductName)</h2>
+                <p class="if-more">
+
+                    <span>@(Model.DateCreated)</span>|
+                    <span>TP.Hồ Chí Minh</span>
+                </p>
+
+            </div>
+            <div class="price"><strong>Giá :</strong> <span
+                    class="new-price text-danger">@Model.Price.Value.ToString("#,##0") VNĐ</span>
+            </div>
+
+            <div class="author">
+
+                <div class="author-left">
+
+                    <a href="/tin-cung-nguoi-dang/66800-0" title="Xem tin đăng của Nội Thất Hòa Hưng" rel="nofollow">
+                        <img src="https://tvovermind.com/wp-content/uploads/2017/12/38424-BossBaby.1200w.tn-1.jpg"
+                            alt="">
+                        <span> Nội Thất Hòa Hưng</span>
+                    </a>
+                </div>
+                <div id="viewphone" class="author-right">
+                    <i class="fa fa-phone" aria-hidden="true"></i>
+                    <span>
+
+                        01655971019
+                    </span>
+                </div>
+            </div>
+
+
+
+            <div class="actions">
+                <button class="add-to-card">Lưu sản phẩm</button>
+                <input hidden asp-for="ProductId" />
+                <button id="chatBtn">Chat với người bán</button>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="product-slider-area section-space-top-95 section-space-bottom-100">
+        <div class="container">
+            <div class="section-title text-center pb-55">
+                <span class="sub-title text-primary">Có thể bạn cũng thích</span>
+                <h2 class="title mb-0">Sản phẩm tương tự</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="swiper-slider-holder swiper-arrow">
+                        <div class="swiper-container product-slider border-issue">
+                            <div class="swiper-wrapper">
+                                @if (lsProducts != null)
+                                {
+                                    foreach (var item in lsProducts)
+                                    {
+                                        string url = $"/{item.Alias}-{item.ProductId}.html";
+                                        <div class="swiper-slide">
+                                            <div class="product-item">
+                                                <div class="product-img img-zoom-effect">
+                                                    <a href="@url">
+                                                        <img width="200px" height="200px" class="img-full"
+                                                    src="~/images/products/@item.Thumb" alt="@item.Title">
+                                                    </a>
+                                                </div>
+                                                <div class="product-content texx">
+                                                    <a class="product-name" href="@url">@item.ProductName</a>
+                                                    <div class="price-box pb-1">
+                                                        <span class="new-price">@item.Price.Value.ToString("#,##0") VNĐ</span>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+
+
+                            </div>
+                        </div>
+                        <!-- Add Arrows -->
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <input type="hidden" id="kvHInp" value="@(Model.Kv)">
+    <input type="hidden" id="thumbHInp" value="@(Model.Thumb)">
+    <input type="hidden" id="idHInp" value="@(Model.ProductId)">
+    <input type="hidden" id="CatIDHInp" value="@(Model.CatId)">
+
+
+</main>
+<!-- Main Content Area End Here  -->
+@section Scripts{
+<script src="~/js/ProductDetail.js"></script>
+
+   
+}

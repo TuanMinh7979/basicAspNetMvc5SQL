@@ -1,0 +1,126 @@
+﻿@model BachHoaTH.ModelViews.MuaHangVM
+@{ 
+    ViewData["Title"] = "Mua hàng";
+    List<BachHoaTH.ModelViews.CartItem> Carts = ViewBag.GioHang;
+}
+<div class="container" style="padding: 100px 0px">
+    <div class="row">
+        <div class="col-lg-6 col-12">
+            <form action="javascript:void(0)">
+                <div class="checkbox-form">
+                    <br />
+                    <h3>Thông tin tài khoản</h3>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="checkout-form-list">
+                                <label>Full Name <span class="required">*</span></label>
+                                <input placeholder="@Model.FullName" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="checkout-form-list">
+                                <label>Address <span class="required">*</span></label>
+                                <input placeholder="@Model.Address" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="checkout-form-list">
+                                <label>Email Address <span class="required">*</span></label>
+                                <input placeholder="@Model.Email" type="email">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="checkout-form-list">
+                                <label>Phone <span class="required">*</span></label>
+                                <input placeholder="@Model.Phone" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-6 col-12">
+            <div class="your-order">
+                <h3>Chi tiết đơn hàng của bạn</h3>
+                <div class="your-order-table table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="cart-product-name">Sản phẩm</th>
+                                <th class="cart-product-total">Giá tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Carts.Count() > 0)
+                            {
+                                foreach (var item in Carts)
+                                {
+                                    <tr class="cart_item">
+                                        <td class="cart-product-name">
+                                            @item.product.ProductName<strong class="product-quantity">
+                                                × @item.amount
+                                            </strong>
+                                        </td>
+                                        <td class="cart-product-total"><span class="amount">@item.TotalMoney.ToString("#,##0") VNĐ</span></td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr class="order-total">
+                                <th>Tổng giá trị đơn hàng</th>
+                                <td><strong><span class="amount">@Carts.Sum(x=>x.TotalMoney).ToString("#,##0") VNĐ</span></strong></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="payment-method">
+                    <div class="payment-accordion">
+                        <div id="accordion">
+                            <div class="card">
+                                <div class="card-header" id="#payment-1">
+                                    <h5 class="panel-title">
+                                        <a href="javascript:void(0)" class="" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true">
+                                            Thanh toán khi nhận hàng(COD)
+                                        </a>
+                                    </h5>
+                                </div>
+                                <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
+                                    <div class="card-body">
+                                        <p>
+                                            Khách hàng được kiểm tra sản phẩm và sau đó thanh toán
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="#payment-2">
+                                    <h5 class="panel-title">
+                                        <a href="javascript:void(0)" class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false">
+                                            Thánh toán qua ví MoMo
+                                        </a>
+                                    </h5>
+                                </div>
+                                <div id="collapseTwo" class="collapse" data-bs-parent="#accordion">
+                                    <div class="card-body">
+                                        <p>
+                                            Quý khách vui lòng liên kiết với MoMo để sử dụng tính năng trên
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="payment-method">
+                            <div class="order-button-payment">
+                                <form action="checkout.html" method="POST">
+                                    <input value="Đặt hàng" type="submit">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>

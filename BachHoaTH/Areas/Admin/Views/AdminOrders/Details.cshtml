@@ -1,0 +1,162 @@
+﻿@model BachHoaTH.Models.Order
+
+@{
+    ViewData["Title"] = "Thông tin đơn hàng" + Model.OrderId;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@section Styles {
+
+<link href="~/Adminassets/css/process.css" rel="stylesheet">
+
+
+
+}
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash"><a asp-area="Admin" asp-controller="Home" asp-action="Index"
+                class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a><a class="breadcrumb-item"
+                asp-area="Admin" asp-controller="AdminProducts" asp-action="Index" class="breadcrumb-item">Danh sách sản
+                phẩm</a><span class="breadcrumb-item active">Thông tin Đơn hàng@Model.OrderId</span></nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Thông tin Đơn hàng:@Model.OrderId</h4>
+        <div class="col-12 row">
+            <div style="border : 1px solid grey" class="col-3">
+                <table class="product-info-table m-t-20">
+                    <tbody>
+                        <tr>
+                            <td>ID:</td>
+                            <td class="text-dark font-weight-semibold">@Model.OrderId</td>
+                        </tr>
+                        <tr>
+                            <td>Khách hàng</td>
+                            <td>@Model.Customer.FullName</td>
+                        </tr>
+                        <tr>
+                            <td>Địa chỉ </td>
+                            <td>@Model.Address</td>
+                        </tr>
+                        <tr>
+                            <td>Tổng giá tiền</td>
+                            <td>@Model.TotalMoney</td>
+                        </tr>
+                        <tr>
+                            <td>Trạng thái:</td>
+                            <td>@Model.TransactStatus.Description</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <div style="border : 1px solid grey" class="col-9">
+                    <table class="product-info-table m-t-20">
+                        <thead>
+                            <th>STT</th>
+                            <th>Sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Giảm giá</th>
+
+                            <th>Giá sản phẩm </th>
+                            <th>Giá thực tế </th>
+                        </thead>
+                        <tbody>@{
+                                int i = 1;
+                            }
+                            @foreach (var item in Model.OrderDetails)
+                            {
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@item.Amount</td>
+                                    <td>@item.Amount</td>
+                                    <td>@if (item.Discount > 0)
+                                        {
+                                            @item.Discount
+                                        }
+                                        else
+                                        {
+                                            <span>0</span>
+                                        }
+                                    </td>
+                                    <td>@item.Price</td>
+                                    <td>@if (item.Discount > 0)
+                                        {
+                                            @(item.Discount*item.Price/100)
+                                        }
+                                        else
+                                        {
+                                            @item.Price}</td>
+                                    </tr>
+                                i++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div style="margin-top:200px" class="col-12 row">
+                <div class="progress">
+                    <div class="progress_inner">
+                        <div class="progress_inner__step">
+                            <label for="step-1">Start order</label>
+                        </div>
+                        <div class="progress_inner__step">
+                            <label for="step-2">Prepare gift</label>
+                        </div>
+                        <div class="progress_inner__step">
+                            <label for="step-3">Pack gift</label>
+                        </div>
+                        <div class="progress_inner__step">
+                            <label for="step-4">Decorate box</label>
+                        </div>
+                        <div class="progress_inner__step">
+                            <label for="step-5">Send gift</label>
+                        </div>
+                        <input checked="checked" id="step-1" name="step" type="radio" />
+                        <input id="step-2" name="step" type="radio" />
+                        <input id="step-3" name="step" type="radio" />
+                        <input id="step-4" name="step" type="radio" />
+                        <input id="step-5" name="step" type="radio" />
+                        <div class="progress_inner__bar"></div>
+                        <div class="progress_inner__bar--set"></div>
+                        <div class="progress_inner__tabs">
+                            <div class="tab tab-0">
+                                <h1>Start order</h1>
+
+                            </div>
+                            <div class="tab tab-1">
+                                <h1>Prepare gift</h1>
+
+                            </div>
+                            <div class="tab tab-2">
+                                <h1>Pack gift</h1>
+
+                            </div>
+                            <div class="tab tab-3">
+                                <h1>Decorate box</h1>
+
+                            </div>
+                            <div class="tab tab-4">
+                                <h1>Send gift</h1>
+
+                            </div>
+                        </div>
+                        <div class="progress_inner__status">
+                            <div class="box_base"></div>
+                            <div class="box_lid"></div>
+                            <div class="box_ribbon"></div>
+                            <div class="box_bow">
+                                <div class="box_bow__left"></div>
+                                <div class="box_bow__right"></div>
+                            </div>
+                            <div class="box_item"></div>
+                            <div class="box_tag"></div>
+                            <div class="box_string"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>

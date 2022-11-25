@@ -1,0 +1,19 @@
+﻿@model List<BachHoaTH.ModelViews.CartItem>
+@if (Model != null && Model.Count() > 0)
+{
+    <li>
+        <a href="cart.html">
+            <i class="pe-7s-shopbag" style="color: white; font-weight: bold"></i>
+            <span>@Model.Count()</span>
+        </a>
+    </li>
+}
+else
+{
+    <li>
+        <a href="cart.html">
+            <i class="pe-7s-shopbag" style="color: white; font-weight: bold"></i>
+            <span style="color: white;">0</span>
+        </a>
+    </li>
+}
