@@ -54,7 +54,7 @@ function remove(productid) {
     },
   });
 }
-$(function ($) {
+$(function () {
   $(document).on("click", ".add-to-card", function () {
     var productid = $("#ProductId").val();
     var soluong = $("#txtsoLuong").val();

@@ -21,39 +21,37 @@ namespace BachHoaTH.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         //public IActionResult Index()
         //{
-        //    int pageSize = 6;
-        //    List<Product> productList = _context.Products.Take(pageSize).ToList();
-        //    List<Category> catList = _context.Categories.Take(8).ToList();
-
-        //    dynamic model = new System.Dynamic.ExpandoObject();
-        //    model.productList = productList;
-        //    model.catList = catList;
-        //    int cntAll = _context.Products.ToList().Count;
-        //    int nofPage = cntAll / pageSize;
-        //    if (cntAll % pageSize > 0)
-        //    {
-        //        nofPage += 1;
-        //    }
-
-        //    model.nofPage = nofPage;
-        //    model.pageSize = pageSize;
-
-        //    Console.WriteLine("--------------------");
-        //    Console.WriteLine(productList.Count());
         //    return View();
         //}
 
-        public IActionResult Index1()
+        public IActionResult Index()
         {
-            return View();
+            int pageSize = 6;
+            List<Product> productList = _context.Products.Take(pageSize).ToList();
+            List<Category> catList = _context.Categories.Take(8).ToList();
+            Debug.WriteLine("--------------------");
+            Debug.WriteLine("--------------------"+catList.Count());
+            dynamic model = new System.Dynamic.ExpandoObject();
+            model.productList = productList;
+            model.catList = catList;
+            int cntAll = _context.Products.ToList().Count;
+            int nofPage = cntAll / pageSize;
+            if (cntAll % pageSize > 0)
+            {
+                nofPage += 1;
+            }
+
+            model.nofPage = nofPage;
+            model.pageSize = pageSize;
+
+            Debug.WriteLine("--------------------");
+            Debug.WriteLine(productList.Count());
+            return View(model);
         }
+
+
         [Route("lien-he.html", Name = "Contact")]
         public IActionResult Contact()
         {

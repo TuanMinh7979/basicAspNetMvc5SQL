@@ -1,4 +1,4 @@
-$(function () { });
+
 // /api/ProductApi/All?$filter=contains(ProductName,'Honda') eq true and catId eq 13 and
 //BY EVENT build api url
 $(".priceFilterBtn").on("click", function () {

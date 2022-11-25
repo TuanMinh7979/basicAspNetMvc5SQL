@@ -1,12 +1,4 @@
-let curUrl = window.location.href;
-let lidx = curUrl.lastIndexOf("/");
-let oriUrl = curUrl;
-if (lidx > 6) {
-  oriUrl = curUrl.substring(0, curUrl.lastIndexOf("/"));
-}
 
-var nofPage = $("#nofPage").val(); //total 4 page
-var pageSize = $("#pageSize").val(); //6 item a page
 // function renderProduct(rs) {
 //   let newList = []
 //   rs.map(item => {
@@ -42,8 +34,20 @@ var pageSize = $("#pageSize").val(); //6 item a page
 
 // }
 
-$(function ($) {
-  $(document).on("click", ".pg-item", function () {
+$(function () {
+
+  let curUrl = window.location.href;
+  let lidx = curUrl.lastIndexOf("/");
+  let oriUrl = curUrl;
+  if (lidx > 6) {
+    oriUrl = curUrl.substring(0, curUrl.lastIndexOf("/"));
+  }
+
+  var nofPage = $("#nofPage").val(); //total 4 page
+  var pageSize = $("#pageSize").val(); //6 item a page
+
+
+  $(document).on("click", ".page-item", function () {
     let newPage = $(this).attr("data-page");
     changePage(newPage);
   });

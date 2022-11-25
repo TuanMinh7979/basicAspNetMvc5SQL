@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 
 #nullable disable
 
@@ -16,6 +18,7 @@ namespace BachHoaTH.Models
             : base(options)
         {
         }
+        public IConfiguration Configuration { get; }
 
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Attribute> Attributes { get; set; }
@@ -40,7 +43,7 @@ namespace BachHoaTH.Models
             if (!optionsBuilder.IsConfigured)
             {
 
-                optionsBuilder.UseSqlServer("workstation id=shopappdb46.mssql.somee.com;packet size=4096;user id=vanthang_SQLLogin_1;pwd=78mzjgwsiw;data source=shopappdb46.mssql.somee.com;persist security info=False;initial catalog=shopappdb46");
+                optionsBuilder.UseSqlServer(Configuration.GetConnectionString("dbBachHoaTH"));
             }
         }
 

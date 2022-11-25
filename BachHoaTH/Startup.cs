@@ -27,7 +27,8 @@ namespace BachHoaTH
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var stringConnectdb = "workstation id=shopappdb46.mssql.somee.com;packet size=4096;user id=vanthang_SQLLogin_1;pwd=78mzjgwsiw;data source=shopappdb46.mssql.somee.com;persist security info=False;initial catalog=shopappdb46";
+            var stringConnectdb = Configuration.GetConnectionString("dbBachHoaTH");
+
             services.AddDbContext<dbMarketsContext>(options => options.UseSqlServer(stringConnectdb));
             services.AddSingleton<HtmlEncoder>(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.All }));
             services.AddSession();
