@@ -42,7 +42,12 @@ namespace BachHoaTH.Controllers
 
             Console.WriteLine("--------------------");
             Console.WriteLine(productList.Count());
-            return View(model);
+            return RedirectToAction("Index1");
+        }
+
+        public IActionResult Index1()
+        {
+            return View();
         }
         [Route("lien-he.html", Name = "Contact")]
         public IActionResult Contact()

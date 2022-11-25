@@ -28,7 +28,7 @@ namespace BachHoaTH.Areas.Admin.Controllers
             var pageNumber = page;
             var pageSize = 3;
             List<Order> orders = new List<Order>();
-            orders = _context.Orders
+            orders =  _context.Orders
           .AsNoTracking()
           .Include(x => x.TransactStatus)
           .Include(x => x.Customer)
