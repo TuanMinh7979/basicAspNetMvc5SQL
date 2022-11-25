@@ -23,27 +23,32 @@ namespace BachHoaTH.Controllers
 
         public IActionResult Index()
         {
-            int pageSize = 6;
-            List<Product> productList = _context.Products.Take(pageSize).ToList();
-            List<Category> catList = _context.Categories.Take(8).ToList();
-
-            dynamic model = new System.Dynamic.ExpandoObject();
-            model.productList = productList;
-            model.catList = catList;
-            int cntAll = _context.Products.ToList().Count;
-            int nofPage = cntAll / pageSize;
-            if (cntAll % pageSize > 0)
-            {
-                nofPage += 1;
-            }
-
-            model.nofPage = nofPage;
-            model.pageSize = pageSize;
-
-            Console.WriteLine("--------------------");
-            Console.WriteLine(productList.Count());
-            return RedirectToAction("Index1");
+            return View();
         }
+
+        //public IActionResult Index()
+        //{
+        //    int pageSize = 6;
+        //    List<Product> productList = _context.Products.Take(pageSize).ToList();
+        //    List<Category> catList = _context.Categories.Take(8).ToList();
+
+        //    dynamic model = new System.Dynamic.ExpandoObject();
+        //    model.productList = productList;
+        //    model.catList = catList;
+        //    int cntAll = _context.Products.ToList().Count;
+        //    int nofPage = cntAll / pageSize;
+        //    if (cntAll % pageSize > 0)
+        //    {
+        //        nofPage += 1;
+        //    }
+
+        //    model.nofPage = nofPage;
+        //    model.pageSize = pageSize;
+
+        //    Console.WriteLine("--------------------");
+        //    Console.WriteLine(productList.Count());
+        //    return View();
+        //}
 
         public IActionResult Index1()
         {
