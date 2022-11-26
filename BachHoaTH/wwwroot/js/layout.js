@@ -10,27 +10,37 @@ function renderProduct(rs, purl) {
   rs.map((item) => {
     let productUrl = `${purl}/${item.alias}-${item.productId}.html`;
     newList.push(
-      `<div class="col-md-6 col-lg-3 mb-3 col-6  productList__item ">
+      `    <div class="col-md-6 col-lg-3 mb-3 col-6  productList__item ">
       <a href="${productUrl}">
-        <div class="productList__item-image">
-          <img src="${purl}/images/products/${item.thumb}" class="card-img-top" alt="Laptop" />
-
-        </div>
-        <div class="productList__item-content">
-          <div class="justify-content-between productList__item-info">
-            <div class="productList__item-name" style="padding: 6px">
-              <p class="mb-0 ">${item.productName}</p>
-            </div>
-            <div class="productList__item-price" style="padding: 6px">
-              <p class="text-dark mb-0 "${item.price}</p>
-            </div>
+          <div class="productList__item-image">
+              <img src="${purl}/images/products/${item.thumb}" class="card-img-top" alt="Laptop" />
+  
           </div>
-          <div class="d-flex justify-content-center addToCartDiv">
-            <button class="addToCartBtn">Xem</button>
+          <div class="productList__item-content">
+              <div class="justify-content-between productList__item-info">
+                  <div class="productList__item-name" >
+                      <p class="mb-0 productNameP" style="padding: 6px">${item.productName}</p>
+                  </div>
+  
+                  <div class="productList__item-price" style="padding: 6px;">
+                     
+                      <p class="mb-0 "><span>Giá: </span><span class="priceP">${item.price}</span></p>
+  
+                      <div class="post-info"
+                      style="display: flex; justify-content:space-between; align-items:center">
+                          <p class="mb-0 priceDate" style="font-size: 0.8rem;"><span>Ngày
+                                  đăng: </span>${item.dateCreated}</p>
+                      </div>
+  
+                  </div>
+              </div>
+           
           </div>
-        </div>
       </a>
-    </div>`
+  </div>`
+
+
+
     );
   });
 
@@ -113,7 +123,7 @@ $(function () {
       success: function (response) {
         $("#records_table").html("");
         $("#records_table").html(response.donHang);
-      
+
       },
     });
   });

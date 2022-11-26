@@ -16,13 +16,16 @@ $(".priceFilterBtn").on("click", function () {
   } else {
     $(this).addClass("act");
   }
-
-
-
-
   let rsUrl = buildFilterApiUrl();
   getAndRenderFromApi(rsUrl);
 });
+
+
+$("#searchNameBtn").on("click", function () {
+  let rsUrl = buildFilterApiUrl();
+
+  getAndRenderFromApi(rsUrl);
+})
 
 $("#catIdSel").on("change", function () {
 
@@ -62,6 +65,16 @@ function buildFilterApiUrl(newFilterStr) {
   let apiQueryUrl = "/api/ProductApi/All?$filter=";
 
 
+  //search name
+  // contains(ProductName,'Honda') eq true
+  let queryStrSearch = ""
+  let valS = $("#searchInp").val();
+  if (valS) valS = valS.trim();
+  if (valS) {
+    queryStrSearch = `contains(productName,'${valS}') eq true and `;
+    arrFilterStr.push(queryStrSearch)
+  }
+
   //cate
   let queryStr = ""
   let val = $("#catIdSel").val();
@@ -76,13 +89,13 @@ function buildFilterApiUrl(newFilterStr) {
   let val1 = $(".priceFilterBtn.act").val();
   if (val1) val1 = val1.trim();
   if (val1 == "l1") {
-    queryStr1 = "Price lt 5000000 and ";
+    queryStr1 = "Price le 5000000 and ";
 
   } else if (val1 == "l2") {
-    queryStr1 = "Price gt 5000000 and Price lt 15000000 and ";
+    queryStr1 = "Price ge 5000000 and Price le 15000000 and ";
 
   } else if (val1 == "l3") {
-    queryStr1 = "Price gt 15000000 and ";
+    queryStr1 = "Price ge 15000000 and ";
 
   }
   //price range
@@ -91,11 +104,11 @@ function buildFilterApiUrl(newFilterStr) {
   let to = parseInt($("#priceTo").val());
   let queryStr2 = "";
   if (from && to) {
-    queryStr2 = `Price gt ${from} and Price lt ${to} and `;
+    queryStr2 = `Price ge ${from} and Price le ${to} and `;
   } else if (from) {
-    queryStr2 = `Price gt ${from} and `;
+    queryStr2 = `Price ge ${from} and `;
   } else if (to) {
-    queryStr2 = `Price lt ${to} and `;
+    queryStr2 = `Price le ${to} and `;
   }
   //
 
@@ -114,6 +127,57 @@ function buildFilterApiUrl(newFilterStr) {
   if (apiQueryUrl.trim().endsWith("and")) {
     apiQueryUrl = apiQueryUrl.substring(0, apiQueryUrl.length - 4);
   }
+  if (apiQueryUrl.trim() == "/api/ProductApi/All?$filter=") {
+    apiQueryUrl = "/api/ProductApi/All"
+  }
   console.log(apiQueryUrl);
   return apiQueryUrl;
 }
+
+
+$(function () {
+
+
+  let catIdSelVal = $("#catCurVal").val();
+
+  let opts = $("#catIdSel option")
+
+  for (let item of opts) {
+    console.log($(item).val().trim())
+    console.log(catIdSelVal)
+    if ($(item).val().trim() == catIdSelVal) {
+
+      $(item).attr('selected', 'selected')
+      return;
+    }
+
+  }
+
+
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'VND',
+  });
+  $(".priceP").each(function () {
+    let rawPrice = $(this).text();
+    $(this).text(formatter.format(rawPrice))
+  })
+
+})
+
+$("#resetBtn").on("click", function () {
+  $("#priceFrom").val("");
+  $("#priceFrom").text("");
+  $("#priceTo").val("");
+  $("#priceTo").text("");
+
+  $("#searchInp").val("");
+  $("#catIdSel").val("0");
+  $(".priceFilterBtn").removeClass("act");
+
+  let rsUrl = buildFilterApiUrl();
+
+
+  getAndRenderFromApi(rsUrl);
+
+})

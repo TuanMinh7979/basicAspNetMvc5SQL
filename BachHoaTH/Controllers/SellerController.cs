@@ -31,7 +31,16 @@ namespace BachHoaTH.Controllers
         {
 
             var cate = await _context.Categories.FindAsync(id);
-            return Json(new { atb = cate.Atb });
+            if (cate.Atb != null)
+            {
+
+                return Json(new { atb = cate.Atb });
+            }
+            else
+            {
+                return Json(new { atb = "" });
+            }
+
 
         }
 
@@ -70,7 +79,7 @@ namespace BachHoaTH.Controllers
 
             _context.Add(newProduct);
             await _context.SaveChangesAsync();
-            
+
             for (int i = 0; i < data.Imgs.Length; i++)
             {
                 Image newImage = new Image();
@@ -78,8 +87,8 @@ namespace BachHoaTH.Controllers
                 newImage.ProductId = newProduct.ProductId;
                 Debug.WriteLine(data.ProductName + j.ToString());
                 string fileName = data.ProductName + j.ToString();
-               
-                newImage.FileName=Utilities.uploadBase64ProductImg(data.Imgs[i], fileName);
+
+                newImage.FileName = Utilities.uploadBase64ProductImg(data.Imgs[i], fileName);
                 _context.Add(newImage);
 
             }

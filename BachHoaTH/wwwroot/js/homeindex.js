@@ -1,39 +1,6 @@
 
-// function renderProduct(rs) {
-//   let newList = []
-//   rs.map(item => {
-
-//     let productUrl = `${oriUrl}/${item.alias}-${item.productId}.html`
-//     newList.push(
-//       `<div class="col-md-6 col-lg-3 mb-3 col-6  productList__item ">
-//       <a href="${productUrl}">
-//         <div class="productList__item-image">
-//           <img src="${oriUrl}/images/products/${item.thumb}" class="card-img-top" alt="Laptop" />
-
-//         </div>
-//         <div class="productList__item-content">
-//           <div class="justify-content-between productList__item-info">
-//             <div class="productList__item-name" style="padding: 6px">
-//               <p class="mb-0 ">${item.productName}</p>
-//             </div>
-//             <div class="productList__item-price" style="padding: 6px">
-//               <p class="text-dark mb-0 "${item.price}</p>
-//             </div>
-//           </div>
-//           <div class="d-flex justify-content-center addToCartDiv">
-//             <button class="addToCartBtn">Add to cart</button>
-//           </div>
-//         </div>
-//       </a>
-//     </div>`
-//     )
-
-//   })
-
-//   return newList;
-
-// }
-
+var nofPage = $("#nofPage").val(); //total 4 page
+var pageSize = $("#pageSize").val(); //6 item a page
 $(function () {
 
   let curUrl = window.location.href;
@@ -43,33 +10,49 @@ $(function () {
     oriUrl = curUrl.substring(0, curUrl.lastIndexOf("/"));
   }
 
-  var nofPage = $("#nofPage").val(); //total 4 page
-  var pageSize = $("#pageSize").val(); //6 item a page
 
 
-  $(document).on("click", ".page-item", function () {
-    let newPage = $(this).attr("data-page");
-    changePage(newPage);
+
+  // _________
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'VND',
   });
-  function changePage(nP) {
-    let skip = (nP - 1) * pageSize;
-    let newTop = pageSize;
-    $.ajax({
-      url: `/api/ProductApi/All?$top=${newTop}&$skip=${skip}`,
-      type: "GET",
-      success: function (res) {
-        $("#pList").html(renderProduct(res, oriUrl));
-      },
-      error: function (e) {
-        alert("error");
-      },
-    });
-  }
+  $(".priceP").each(function () {
+    let rawPrice = $(this).text();
+    $(this).text(formatter.format(rawPrice))
+  })
 
-  $(document).on("click", ".catForm", function () {
-    $(this).submit();
-  });
+  // _________
+
 });
+
+
+$(document).on("click", ".page-item", function () {
+  let newPage = $(this).attr("data-page");
+  changePage(parseInt(newPage));
+});
+function changePage(nP) {
+
+  let skip = (nP - 1) * pageSize;
+
+  let newTop = pageSize;
+  $.ajax({
+    url: `/api/ProductApi/All?$top=${newTop}&$skip=${skip}&$orderby=DateCreated desc`,
+    type: "GET",
+    success: function (res) {
+      $("#pList").html(renderProduct(res, window.location.origin));
+    },
+    error: function (e) {
+      alert("error");
+    },
+  });
+}
+
+$(document).on("click", ".catForm", function () {
+  $(this).submit();
+});
+
 
 // alert(usrName)
 $(".categories-slider").slick({
@@ -105,3 +88,5 @@ $(".categories-slider").slick({
 });
 
 //phan trang
+
+

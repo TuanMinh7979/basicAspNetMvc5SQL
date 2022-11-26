@@ -61,16 +61,23 @@
                         </div>
                         <div class="productList__item-content">
                             <div class="justify-content-between productList__item-info">
-                                <div class="productList__item-name" style="padding: 6px">
-                                    <p class="mb-0 ">@(product.ProductName)</p>
+                                <div class="productList__item-name" >
+                                    <p class="mb-0 productNameP" style="padding: 6px">@(product.ProductName)</p>
                                 </div>
-                                <div class="productList__item-price" style="padding: 6px">
-                                    <p class="text-dark mb-0 ">@(product.Price)</p>
+
+                                <div class="productList__item-price" style="padding: 6px;">
+                                   
+                                    <p class="mb-0 "><span>Giá: </span><span class="priceP">@(product.Price)</span></p>
+
+                                    <div class="post-info"
+                                    style="display: flex; justify-content:space-between; align-items:center">
+                                        <p class="mb-0 priceDate" style="font-size: 0.8rem;"><span>Ngày
+                                                đăng: </span>@(product.DateCreated)</p>
+                                    </div>
+
                                 </div>
                             </div>
-                            <div class="d-flex justify-content-center addToCartDiv">
-                                <button class="addToCartBtn">Xem</button>
-                            </div>
+                         
                         </div>
                     </a>
                 </div>
@@ -85,12 +92,12 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination">
 
-                <li class="page-item page-link" data-page=1>1</li>
-                <li class="page-item page-link" data-page=2>2</li>
-                <li class="page-item page-link" data-page=3>3</li>
-                <li class="page-item page-link" data-page=4>4</li>
-                <li class="page-item page-link" data-page=5>5</li>
-                <li class="page-item page-link" data-page=6>6</li>
+                <li class="page-item page-link" data-page="1">1</li>
+                <li class="page-item page-link" data-page="2">2</li>
+                <li class="page-item page-link" data-page="3">3</li>
+                <li class="page-item page-link" data-page="4">4</li>
+                <li class="page-item page-link" data-page="5">5</li>
+                <li class="page-item page-link" data-page="6">6</li>
 
             </ul>
         </nav>

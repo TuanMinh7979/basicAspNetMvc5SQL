@@ -15,9 +15,10 @@ img {
   display: flex;
   background-color: white;
   justify-content: space-around;
-  height: 700px;
+  height: 900px;
   overflow-y: scroll;
-  padding: 60px;
+  padding: 60px 60px 60px 60px;
+ 
 
 }
 
@@ -180,7 +181,7 @@ img {
   top: 50%;
   transform: translateY(-50%);
   border: none;
-  width:30px;
+  width: 30px;
   height: 30px;
   display: flex;
   justify-content: center;

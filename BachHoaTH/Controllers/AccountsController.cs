@@ -136,6 +136,7 @@ namespace BachHoaTH.Controllers
                     }
                     catch
                     {
+                     
                         return RedirectToAction("DangKyTaiKhoan", "Accounts");
                     }
                 }
@@ -174,7 +175,10 @@ namespace BachHoaTH.Controllers
                     bool isEmail = Utilities.IsValidEmail(customer.UserName);
                     if (!isEmail) return View(customer);
                     var khachang = _context.Customers.AsNoTracking().SingleOrDefault(x => x.Email.Trim() == customer.UserName);
-                    if (khachang == null) return RedirectToAction("DangKyTaiKhoan");
+                    if (khachang == null) {
+                        _notifyService.Warning("Đăng nhập thất bại, hãy tạo tài khoản mới");
+                        return RedirectToAction("DangKyTaiKhoan");
+                    } 
 
                     string pass = (customer.Password + khachang.Salt.Trim()).ToMD5();
                     if (khachang.Password != pass)
@@ -205,6 +209,7 @@ namespace BachHoaTH.Controllers
             }
             catch
             {
+                _notifyService.Warning("Đăng nhập thất bại, hãy tạo tài khoản mới");
                 return RedirectToAction("DangKyTaiKhoan", "Accounts");
             }
             return View(customer);

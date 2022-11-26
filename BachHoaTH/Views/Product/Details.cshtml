@@ -29,12 +29,12 @@
                         <div class="album-slider">
                             @* <div class="album-slider__item" style="height: 60px; width: 60px">
                                 <img class=""
-                                    src="https://media.riverford.co.uk/images/512x512-df7968962d0b98e4b2034efbd8ae8ef2.jpg"
-                                    alt="" />
+                                src="https://media.riverford.co.uk/images/512x512-df7968962d0b98e4b2034efbd8ae8ef2.jpg"
+                                alt="" />
 
-                            </div> *@
+                                </div> *@
 
-                            
+
                         </div>
                     </div>
                 </div>
@@ -43,48 +43,13 @@
             <div class="product__spec">
                 <div id="firstSection" class="specSection">
                     <p style="font-size: 1.6rem">Thông số kỹ thuật</p>
-                    @* <div class="spec-table">
-                        <table class="spec-table">
-                        <tr>
-                        <td>
-                        <div class="tdContent"> <img class="iconTd"
-                        src="https://icons.veryicon.com/png/o/application/tmall-icon-library/brand-exclusive-1.png"
-                        alt=""><strong>Hãng xe</strong><span></span>
-                        </div>
-                        </td>
-                        <td>
-                        <div class="tdContent"> <img class="iconTd"
-                        src="https://icons.veryicon.com/png/o/application/tmall-icon-library/brand-exclusive-1.png"
-                        alt=""><strong>Dòng xe</strong><span></span>
-                        </div>
-                        </td>
-                        </tr>
-                        <tr>
-                        <td>
-                        <div class="tdContent"> <img class="iconTd"
-                        src="https://icons.veryicon.com/png/o/application/tmall-icon-library/brand-exclusive-1.png"
-                        alt=""><strong>Số Km đã đi</strong><span></span>
-                        </div>
 
-                        </td>
-                        <td>
-                        <div class="tdContent"> <img class="iconTd"
-                        src="https://icons.veryicon.com/png/o/application/tmall-icon-library/brand-exclusive-1.png"
-                        alt=""><strong>Hang xe</strong><span>Hon</span>
-                        </div>
-                        </td>
-
-                        </tr>
-                        </table>
-                        </div> *@
                 </div>
                 <hr />
                 <div class="specSection">
                     <p style="font-size: 1.6rem">Mô tả </p>
                     <div class="productMota">
-                        Bán xe 50cc 2020 chính chủ
-                        Xe sạch sẽ đẹp
-                        Xe đã làm máy 80cc êm như zin mạnh mượt
+                        @(Model.Description)
                     </div>
                 </div>
             </div>
@@ -94,11 +59,12 @@
             <label>Danh mục: </label><span> <a href="/@Model.Cat.Alias">@Model.Cat.CatName</a></span>
             <div class="title">
                 <h2>@(Model.ProductName)</h2>
-                <p class="if-more">
+                <p class="if-more" style="font-weight: bold">
 
-                    <span>@(Model.DateCreated)</span>|
-                    <span>TP.Hồ Chí Minh</span>
+                    <span>@(Model.DateCreated)</span>
+
                 </p>
+                <p class="shopAddress" style="font-weight: bold">TP.Hồ Chí Minh</p>
 
             </div>
             <div class="price"><strong>Giá :</strong> <span
@@ -109,7 +75,9 @@
 
                 <div class="author-left">
 
+                    <p style="font-weight: bold;"> Người bán:</p>
                     <a href="/tin-cung-nguoi-dang/66800-0" title="Xem tin đăng của Nội Thất Hòa Hưng" rel="nofollow">
+
                         <img src="https://tvovermind.com/wp-content/uploads/2017/12/38424-BossBaby.1200w.tn-1.jpg"
                             alt="">
                         <span> Nội Thất Hòa Hưng</span>
@@ -198,5 +166,5 @@
 @section Scripts{
 <script src="~/js/ProductDetail.js"></script>
 
-   
+
 }

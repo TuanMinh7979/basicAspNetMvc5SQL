@@ -39,8 +39,7 @@ $(document).ready(function () {
             res.forEach(item => {
                 slideImgs.push(oriUrl + "/images/products/" + item.fileName)
             })
-            console.log("-------------<><><>{{{")
-            console.log(slideImgs);
+
 
             slideImgs.forEach(linkI => {
                 console.log(linkI)
@@ -102,6 +101,10 @@ $(document).ready(function () {
                     );
                 }, 0)
 
+                //parse string to html
+                let rawString = $(".productMota").text();
+                console.log(eval('`' + rawString + '`'))
+                $(".productMota").html(eval('`' + rawString + '`'));
 
 
 

@@ -9,8 +9,7 @@
 @section Styles{
 
 <link rel="stylesheet" href="~/css/shop.css">
-<link rel="stylesheet" href="~/css/phantranglib.css" />
-<link rel="stylesheet" href="~/css/phantrang.css" />
+
 
 }
 <!-- Begin Main Content Area -->
@@ -23,8 +22,9 @@
                     <div class="sidebar-area">
                         <div class="widgets-searchbox mb-9">
 
-                            <input class="input-field" value=@(ViewBag.searchVal) type="text" placeholder="Search">
-                            <button class="widgets-searchbox-btn">
+                            <input class="input-field" id="searchInp" value=@(ViewBag.searchVal) type="text"
+                                placeholder="Search">
+                            <button id="searchNameBtn" class="widgets-searchbox-btn">
                                 <i class="pe-7s-search"></i>
                             </button>
 
@@ -32,14 +32,13 @@
 
 
                         <div class="widgets-area mb-9">
-                            <h2 class="widgets-title mb-5">Color</h2>
+                            <h2 class="widgets-title mb-5">Lọc</h2>
                             <div class="widgets-item">
                                 <ul class="widgets-checkbox">
                                     <li>
                                         <input class="input-checkbox" type="checkbox" id="color-selection-1">
                                         <label class="label-checkbox mb-0" for="color-selection-1">
-                                            Green
-                                            <span>7</span>
+                                            Bài đăng mới
                                         </label>
                                     </li>
 
@@ -65,13 +64,17 @@
                                         </div>
                                     </div>
 
-                                    <div class="priceRangeSubmit"><button id="priceRangeSubmit">Ap dung</button></div>
+                                    <div class="priceRangeSubmit"><button style="border-radius:6px"
+                                            id="priceRangeSubmit">Áp dụng</button></div>
 
                                 </div>
                             </div>
                         </div>
 
 
+                    </div>
+                    <div class="resetbtn">
+                        <button id="resetBtn" class="btn btn-primary">Reset filter</button>
                     </div>
                 </div>
                 <div class="col-lg-9 order-lg-2 order-1">
@@ -80,17 +83,17 @@
 
                             <li class="short">
                                 <div id="catFilterGroup">
-                                    <span style="border: 1px solid blue">Danh mục </span>
-                                    <select class="" id="catIdSel" value=@(ViewBag.catIdVal)>
-                                        <option value="0
-                                        ">Tất cả</option>
-                                        <option value="3">Laptop</option>
-                                        <option value="4">Linh kiện máy tính</option>
+                                    <span>Danh mục </span>
+                                    <select id="catIdSel" value="@(ViewBag.catIdVal)">
+                                        <option selected value="0">Tất cả</option>
+                                        <option value="19">Laptop</option>
+                                        <option value="12">Linh kiện máy tính</option>
                                         <option value="9">Đồ gia dụng</option>
-                                        <option value="12">Điện thoại</option>
+                                        <option value="18">Điện thoại</option>
                                         <option value="13">Xe máy</option>
                                         <option value="14">Giày</option>
                                     </select>
+                                    <input type="hidden" value="@(ViewBag.catIdVal)" id="catCurVal">
                                 </div>
 
                             </li>
@@ -105,7 +108,7 @@
                     <div class="tab-content text-charcoal pt-8">
                         <div class="tab-pane fade show active" id="grid-view" role="tabpanel"
                             aria-labelledby="grid-view-tab">
-                            <div id="proList" style="border:1px solid red" class="product-grid-view row">
+                            <div id="proList" class="product-grid-view row">
                                 @* *@
                                 @if (Model != null && Model.Count() > 0)
                                 {
@@ -121,16 +124,25 @@
                                                 </div>
                                                 <div class="productList__item-content">
                                                     <div class="justify-content-between productList__item-info">
-                                                        <div class="productList__item-name" style="padding: 6px">
-                                                            <p class="mb-0 ">@(item.ProductName)</p>
+                                                        <div class="productList__item-name">
+                                                            <p class="mb-0 productNameP" style="padding: 6px">
+                                                                @(item.ProductName)</p>
                                                         </div>
-                                                        <div class="productList__item-price" style="padding: 6px">
-                                                            <p class="text-dark mb-0 ">@(item.Price)</p>
+
+                                                        <div class="productList__item-price" style="padding: 6px;">
+
+                                                            <p class="mb-0 "><span>Giá: </span><span
+                                                            class="priceP">@(item.Price)</span></p>
+
+                                                            <div class="post-info"
+                                                        style="display: flex; justify-content:space-between; align-items:center">
+                                                                <p class="mb-0 priceDate" style="font-size: 0.8rem;"><span>Ngày
+                                                                        đăng: </span>@(item.DateCreated)</p>
+                                                            </div>
+
                                                         </div>
                                                     </div>
-                                                    <div class="d-flex justify-content-center addToCartDiv">
-                                                        <button class="addToCartBtn">Xem</button>
-                                                    </div>
+
                                                 </div>
                                             </a>
                                         </div>
@@ -145,6 +157,8 @@
 
                 </div>
             </div>
+
+
             @* <div>
                 <div id="pager"></div>
                 <div class="text-muted" id="info"></div>
@@ -165,5 +179,5 @@
 
 @section Scripts{
 <script type="text/javascript" src="~/js/shop.js"></script>
-@* <script type="text/javascript" src="~/js/phantrang.js"></script> *@
+
 }

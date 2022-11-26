@@ -29,7 +29,7 @@ namespace BachHoaTH.Controllers
         public IActionResult Index()
         {
             int pageSize = 6;
-            List<Product> productList = _context.Products.Take(pageSize).ToList();
+            List<Product> productList = _context.Products.Take(pageSize).OrderByDescending(p=>p.DateCreated).ToList();
             List<Category> catList = _context.Categories.Take(8).ToList();
             Debug.WriteLine("--------------------");
             Debug.WriteLine("--------------------"+catList.Count());

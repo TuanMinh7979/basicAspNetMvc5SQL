@@ -52,13 +52,33 @@
   border: 1px solid blue;
 }
 
+#catIdSel {
+  width: 60%;
+}
+
+#catFilterGroup {
+  display: flex;
+  width: 300px;
+  border: 1px solid gainsboro;
+  line-height: 1em;
+  justify-content: space-around;
+  align-items: center !important;
+  vertical-align: center;
+}
+
+.priceFilterBtn.act {
+  background-color: gold;
+}
+
+
+
 .productList__item {
   height: 360px;
-  border: 1px solid blue;
+
 }
 
 .productList__item-image {
-  border: 1px solid red;
+
   height: 180px;
 }
 
@@ -68,39 +88,36 @@
 }
 
 .productList__item-content {
-  border: 1px solid yellow;
+  border: 1px solid lightseagreen;
   height: 50%;
   padding: 10px;
 }
 
-.productList__item-content > * {
-  border: 1px solid red;
-}
+
 
 .productList__item-info {
-  border: 1px solid green;
+
   height: 80%;
 }
 
 .productList__item-name {
-  border: 1px solid yellow;
-  height: 50%;
+
+  height: 40%;
 }
 
-#catIdSel {
-  width: 60%;
+
+.priceP {
+  color: red;
 }
 
-#catFilterGroup {
-  display: flex;
-  width: 300px;
-  border: 1px solid red;
-  line-height: 1em;
-  justify-content: space-around;
-  align-items: center !important;
-  vertical-align: center;
+.productNameP {
+  font-weight: 600;
+  font-size: 1.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.priceFilterBtn.act {
-  background-color: gold;
+#proList {
+  border: 1px solid gainsboro;
 }

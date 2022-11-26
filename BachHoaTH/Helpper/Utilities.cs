@@ -174,20 +174,30 @@ namespace BachHoaTH.Helpper
             byte[] bytes = Convert.FromBase64String(realBase64Img);
             string firstChar = realBase64Img.Substring(0, 1);
             string ext = ".jpg";
-            if (firstChar == "/")
+            if (realBase64Img.StartsWith("/9"))
             {
+                Debug.WriteLine("----------------JPEG JFIF");
+                ext = ".jfif";
+            }
+            else if (firstChar == "/")
+            {
+
+                Debug.WriteLine("----------------JPG");
                 ext = ".jpg";
             }
+
             else if (firstChar == "i")
             {
+                Debug.WriteLine("----------------PNG");
                 ext = ".png";
             }
             else if (firstChar == "U")
             {
+                Debug.WriteLine("----------------WEP");
                 ext = ".webp";
             }
 
-            fileName = fileName.Replace(' ', '-');
+            fileName = SEOUrl(fileName);
             string imageName = fileName + ext;
             string imgPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "products", imageName);
             System.IO.File.WriteAllBytes(imgPath, bytes);
