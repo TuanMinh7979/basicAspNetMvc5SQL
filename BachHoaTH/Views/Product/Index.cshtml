@@ -22,7 +22,7 @@
                     <div class="sidebar-area">
                         <div class="widgets-searchbox mb-9">
 
-                            <input class="input-field" id="searchInp" value=@(ViewBag.searchVal) type="text"
+                            <input class="input-field" id="searchInp" value="@ViewBag.searchVal" type="text"
                                 placeholder="Search">
                             <button id="searchNameBtn" class="widgets-searchbox-btn">
                                 <i class="pe-7s-search"></i>
@@ -84,7 +84,7 @@
                             <li class="short">
                                 <div id="catFilterGroup">
                                     <span>Danh mục </span>
-                                    <select id="catIdSel" value="@(ViewBag.catIdVal)">
+                                    <select id="catIdSel" value="@ViewBag.catIdVal">
                                         <option selected value="0">Tất cả</option>
                                         <option value="19">Laptop</option>
                                         <option value="12">Linh kiện máy tính</option>
@@ -93,14 +93,17 @@
                                         <option value="13">Xe máy</option>
                                         <option value="14">Giày</option>
                                     </select>
-                                    <input type="hidden" value="@(ViewBag.catIdVal)" id="catCurVal">
+                                    <input type="hidden" value="@ViewBag.catIdVal" id="catCurVal" />
                                 </div>
 
                             </li>
                             <li class="short">
-                                <select class="nice-select wide rounded-0">
-                                    <option value="5">Sort by High Price</option>
-                                    <option value="6">Sort by Low Price</option>
+                                <select id="sortSel" value="1" class="nice-select wide rounded-0">
+                                    <option value="1">Sort by newest</option>
+                                    <option value="2">Sort by High to low Price</option>
+                                    <option value="3">Sort by Low to high Price</option>
+
+
                                 </select>
                             </li>
                         </ul>
@@ -109,7 +112,7 @@
                         <div class="tab-pane fade show active" id="grid-view" role="tabpanel"
                             aria-labelledby="grid-view-tab">
                             <div id="proList" class="product-grid-view row">
-                                @* *@
+
                                 @if (Model != null && Model.Count() > 0)
                                 {
                                     foreach (var item in Model)
@@ -148,7 +151,7 @@
                                         </div>
                                     }
                                 }
-                                @* *@
+
                             </div>
                         </div>
 

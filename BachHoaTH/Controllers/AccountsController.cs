@@ -192,7 +192,7 @@ namespace BachHoaTH.Controllers
                     if (khachang == null)
                     {
                         _notifyService.Warning("Đăng nhập thất bại, thử lại");
-                        return RedirectToAction("DangNhap");
+                        return RedirectToAction("Login");
                     }
 
                     string pass = (customer.Password + khachang.Salt.Trim()).ToMD5();

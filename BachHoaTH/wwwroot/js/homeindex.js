@@ -1,6 +1,9 @@
 
 var nofPage = $("#nofPage").val(); //total 4 page
 var pageSize = $("#pageSize").val(); //6 item a page
+
+// _________
+
 $(function () {
 
   let curUrl = window.location.href;
@@ -11,14 +14,14 @@ $(function () {
   }
 
 
-
-
-  // _________
-  const formatter = new Intl.NumberFormat('en-US', {
+  let formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'VND',
   });
-  $(".priceP").each(function () {
+
+
+  let pricePs = $(document).find(".priceP");
+  $(pricePs).each(function () {
     let rawPrice = $(this).text();
     $(this).text(formatter.format(rawPrice))
   })

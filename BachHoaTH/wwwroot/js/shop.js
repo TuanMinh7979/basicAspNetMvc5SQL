@@ -46,12 +46,21 @@ $("#priceRangeSubmit").on("click", function () {
 });
 
 //
+
+$("#sortSel").on("change", function () {
+  let rsUrl = buildFilterApiUrl();
+
+  getAndRenderFromApi(rsUrl);
+})
+
+
+////
 function getAndRenderFromApi(apiUrl) {
   $.ajax({
     url: apiUrl,
     type: "GET",
     success: function (res) {
-   
+
       $("#proList").html(renderProduct(res, window.location.origin));
     },
     error: function (e) {
@@ -122,14 +131,36 @@ function buildFilterApiUrl(newFilterStr) {
   }
 
 
+
+
   let filterStr = arrFilterStr.join("");
   apiQueryUrl += filterStr;
   if (apiQueryUrl.trim().endsWith("and")) {
     apiQueryUrl = apiQueryUrl.substring(0, apiQueryUrl.length - 4);
   }
+
+
   if (apiQueryUrl.trim() == "/api/ProductApi/All?$filter=") {
     apiQueryUrl = "/api/ProductApi/All"
   }
+
+  let sortQuery = "";
+  let sortVal = $("#sortSel").val()
+  if (sortVal == 1) {
+    sortQuery = "$orderby=DateCreated desc"
+  } else if (sortVal == 2) {
+    sortQuery = "$orderby=Price desc"
+  } else if (sortVal == 3) {
+    sortQuery = "$orderby=Price asc"
+  }
+
+  if (apiQueryUrl == "/api/ProductApi/All") {
+    apiQueryUrl += "?"
+  } else {
+    apiQueryUrl += "&"
+  }
+  apiQueryUrl += sortQuery
+
 
   return apiQueryUrl;
 }
@@ -143,7 +174,7 @@ $(function () {
   let opts = $("#catIdSel option")
 
   for (let item of opts) {
- 
+
     if ($(item).val().trim() == catIdSelVal) {
 
       $(item).attr('selected', 'selected')

@@ -10,6 +10,11 @@ var startSpin = function () {
 var stopSpin = function () {
   $("#overlay").fadeOut();
 }
+
+let formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'VND',
+});
 function renderProduct(rs, purl) {
   let newList = [];
   rs.map((item) => {
@@ -29,7 +34,7 @@ function renderProduct(rs, purl) {
   
                   <div class="productList__item-price" style="padding: 6px;">
                      
-                      <p class="mb-0 "><span>Giá: </span><span class="priceP">${item.price}</span></p>
+                      <p class="mb-0 "><span>Giá: </span><span class="priceP">${formatter.format(item.price)}</span></p>
   
                       <div class="post-info"
                       style="display: flex; justify-content:space-between; align-items:center">
