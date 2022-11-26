@@ -13,16 +13,17 @@
                 <div class="col-lg-12">
                     <div class="header-middle-wrap">
                         <a href="/" class="header-logo">
-                            <img src="~/assets/images/logo/dark.png" alt="Header Logo">
+                            <img src="~/images/logo.png" alt="Header Logo">
                         </a>
-                        <div class="header-search-area d-none d-lg-block">
+                        <div style="margin-left:30px" class="header-search-area d-none d-lg-block">
                             <form action="/shop" method="post" id="gloSearchForm" class="header-searchbox">
-                                <input class="input-field" name="search" type="text" placeholder="Search Products">
-                                <button type="submit"> TÌM</button>
+                                <input class="" style="width:80%; border:none" name="search" type="text"
+                                    placeholder="Search">
+                                <button style="margin-left: 10px; border: none; color: blue"type="submit"> <i class="fa fa-search" aria-hidden="true"></i></button>
 
                             </form>
                         </div>
-                        <div class="header-right">
+                        <div style="margin-left:30px" class="header-right">
                             <ul>
                                 <li>
                                     @if (User.Identity.IsAuthenticated)
@@ -36,10 +37,11 @@
                                 </li>
                                 <li class="dropdown d-none d-md-block">
                                     <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button"
-                                            id="settingButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                        id="settingButton" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="pe-7s-users" style="color: white; font-weight:bold"></i>
                                     </button>
-                                    <ul class="dropdown-menu dropdown-menu-end" id="accountUl" aria-labelledby="settingButton">
+                                    <ul class="dropdown-menu dropdown-menu-end" id="accountUl"
+                                        aria-labelledby="settingButton">
                                         @if (User.Identity.IsAuthenticated)
                                         {
 
@@ -82,7 +84,7 @@
                                     <li class="">
 
                                         <a style="color: white; font-weight: 500" class="btn btn-warning"
-                                       href="/dang-tin">ĐĂNG BÁN</a>
+                                        href="/dang-tin">ĐĂNG BÁN</a>
                                     </li>
 
 
@@ -105,7 +107,7 @@
                                     <li class="">
 
                                         <a style="color: white; font-weight: 500" class="btn btn-success"
-                                       href="/tin-da-dang">TIN ĐÃ ĐĂNG</a>
+                                        href="/tin-da-dang">TIN ĐÃ ĐĂNG</a>
                                     </li>
 
 
@@ -185,7 +187,7 @@
                     <ul class="dropdown-wrap justify-content-center text-silver">
                         <li class="dropdown dropup">
                             <button class="btn btn-link dropdown-toggle ht-btn" type="button" id="languageButtonTwo"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 English
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="languageButtonTwo">
@@ -196,7 +198,7 @@
                         </li>
                         <li class="dropdown dropup">
                             <button class="btn btn-link dropdown-toggle ht-btn usd-dropdown" type="button"
-                                    id="currencyButtonTwo" data-bs-toggle="dropdown" aria-expanded="false">
+                                id="currencyButtonTwo" data-bs-toggle="dropdown" aria-expanded="false">
                                 USD
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="currencyButtonTwo">
@@ -206,7 +208,7 @@
                         </li>
                         <li class="dropdown dropup">
                             <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button" id="settingButtonTwo"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="pe-7s-users" style="color: white; font-weight:bold"></i>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingButtonTwo">

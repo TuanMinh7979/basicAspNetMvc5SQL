@@ -28,14 +28,16 @@ namespace BachHoaTH.Areas.Admin.Controllers
             var pageNumber = page;
             var pageSize = 3;
             List<Order> orders = new List<Order>();
-            orders =  _context.Orders
+            orders = _context.Orders
           .AsNoTracking()
           .Include(x => x.TransactStatus)
           .Include(x => x.Customer)
+
           .OrderByDescending(x => x.OrderDate).ToList();
-            PagedList<Order> models = new PagedList<Order>(orders.AsQueryable(), pageNumber, pageSize);
+            PagedList<Order> models = new PagedList<Order>(orders.AsQueryable(), pageNumber, pageSize)
+            {
 
-
+            };
             ViewBag.CurrentPage = pageNumber;
 
             return View(models);

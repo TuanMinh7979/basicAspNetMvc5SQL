@@ -86,7 +86,7 @@ $(document).on("click", "#selectCatUl>div", function () {
         type: "GET",
         dataType: "JSON",
         success: function (results) {
-            console.log(results.atb);
+           
 
             $(".danhmucText").val(catName)
             $(".danhmucText").attr('id', catId)
@@ -166,7 +166,7 @@ $(document).on("click", "#dangtinBtn", function () {
     //
 
 
-    console.log(data["Thumb"])
+
     data["Imgs"] = [];
     for (let i = 1; i < allImage.length; i++) {
         let imageUrlBg = $(allImage[i]).css("background-image");
@@ -178,7 +178,7 @@ $(document).on("click", "#dangtinBtn", function () {
 
 
 
-    console.log(data);
+
 
     startSpin();
     $.ajax({
@@ -190,7 +190,7 @@ $(document).on("click", "#dangtinBtn", function () {
             stopSpin();
             alert("Đăng bán thành công");
             window.location.href = "/"
-            console.log(results)
+      
         },
         error: function (xhr) {
             alert('error');

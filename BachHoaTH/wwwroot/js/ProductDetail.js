@@ -55,7 +55,7 @@ $(document).ready(function () {
 
 
             slideImgs.forEach(linkI => {
-                console.log(linkI)
+        
                 $(".album-slider").append(
                     `<div class="album-slider__item" style="height: 60px; width: 60px">
                         <img class=""
@@ -116,7 +116,7 @@ $(document).ready(function () {
 
                 //parse string to html
                 let rawString = $(".productMota").text();
-                console.log(eval('`' + rawString + '`'))
+               
                 $(".productMota").html(eval('`' + rawString + '`'));
 
 

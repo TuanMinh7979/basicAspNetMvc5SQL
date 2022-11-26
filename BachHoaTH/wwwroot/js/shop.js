@@ -51,7 +51,7 @@ function getAndRenderFromApi(apiUrl) {
     url: apiUrl,
     type: "GET",
     success: function (res) {
-      console.log(res);
+   
       $("#proList").html(renderProduct(res, window.location.origin));
     },
     error: function (e) {
@@ -130,7 +130,7 @@ function buildFilterApiUrl(newFilterStr) {
   if (apiQueryUrl.trim() == "/api/ProductApi/All?$filter=") {
     apiQueryUrl = "/api/ProductApi/All"
   }
-  console.log(apiQueryUrl);
+
   return apiQueryUrl;
 }
 
@@ -143,8 +143,7 @@ $(function () {
   let opts = $("#catIdSel option")
 
   for (let item of opts) {
-    console.log($(item).val().trim())
-    console.log(catIdSelVal)
+ 
     if ($(item).val().trim() == catIdSelVal) {
 
       $(item).attr('selected', 'selected')
