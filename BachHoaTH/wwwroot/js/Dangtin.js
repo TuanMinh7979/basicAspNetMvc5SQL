@@ -91,7 +91,7 @@ $(document).on("click", "#selectCatUl>div", function () {
             $(".danhmucText").val(catName)
             $(".danhmucText").attr('id', catId)
 
-            
+
             $("#Ttct").html(eval('`' + results.atb + '`'))
         },
         error: function (xhr) {
@@ -176,7 +176,7 @@ $(document).on("click", "#dangtinBtn", function () {
 
     }
 
-   
+
 
     console.log(data);
 
@@ -201,3 +201,63 @@ $(document).on("click", "#dangtinBtn", function () {
 
 })
 
+
+///laptop
+var dongmayData = [
+    {
+        gid: "Apple",
+        name: "Macbook",
+
+    },
+    {
+        gid: "Apple",
+        name: "Macbook Air",
+
+    },
+
+    {
+        gid: "Asus",
+        name: "AsusPro",
+
+    },
+    {
+        gid: "Asus",
+        name: "Vivobook",
+
+    },
+    {
+        gid: "Acer",
+        name: "Aspire",
+
+    },
+    {
+        gid: "Acer",
+        name: "Helio",
+
+    },
+]
+
+
+
+$(document).on("change", "#hanglaptop", function () {
+
+    let dongmayId = $(this).val();
+
+    $("#dongmay option").remove();
+    if (dongmayId == "0") {
+        dongmayData.map(item => {
+
+            $("#dongmay").append(`<option value="${item.name}">${item.name}</option>`);
+
+        })
+    } else {
+        dongmayData.map(item => {
+
+            if (item.gid == dongmayId) {
+
+                $("#dongmay").append(`<option value="${item.name}">${item.name}</option>`);
+            }
+        })
+    }
+
+})

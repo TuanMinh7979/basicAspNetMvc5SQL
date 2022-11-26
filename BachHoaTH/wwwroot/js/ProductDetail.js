@@ -11,6 +11,11 @@ let phoneStatus = {
     "1": "Đã sử dụng",
     "2": "Đã sửa chữa"
 }
+let laptopTinhTrang = {
+    "0": "Mới",
+    "1": "Đã sử dụng",
+    "2": "Đã sửa chữa"
+}
 
 
 $(document).ready(function () {
