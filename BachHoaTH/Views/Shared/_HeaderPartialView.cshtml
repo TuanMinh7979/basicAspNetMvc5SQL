@@ -87,6 +87,27 @@
                                     </li>
                                 }
 
+        @if (User.Identity.IsAuthenticated)
+
+
+                                {
+                                    <li class="">
+
+                                        <a style="color: white; font-weight: 500" class="btn btn-success"
+                                       href="/tin-da-dang">TIN ĐÃ ĐĂNG</a>
+                                    </li>
+
+
+                                }
+                                else
+                                {
+                                    <li class="">
+
+                                        <a style="color: white; font-weight: 500" class="btn" href="/login">
+                                           TIN ĐÃ ĐĂNG
+                                        </a>
+                                    </li>
+                                }
 
                                 <li class="d-block d-lg-none">
                                     <a href="#searchBar" class="search-btn toolbar-btn">

@@ -22,10 +22,10 @@ namespace BachHoaTH.Controllers
         public IActionResult Index()
         {
 
-           var ls = _context.Products.AsNoTracking()
-                    
-                    .OrderByDescending(x => x.DateCreated)
-                    .ToList();
+            var ls = _context.Products.AsNoTracking()
+
+                     .OrderByDescending(x => x.DateCreated)
+                     .ToList();
             return View(ls);
 
 
@@ -40,7 +40,7 @@ namespace BachHoaTH.Controllers
             Debug.WriteLine(search);
             Debug.WriteLine(catId);
             List<Product> ls = new List<Product>();
-            if (!String.IsNullOrEmpty(search) && catId!=null )
+            if (!String.IsNullOrEmpty(search) && catId != null)
             {
                 ls = _context.Products.AsNoTracking()
                      .Where(x => x.CatId == catId && x.ProductName.Contains(search) == true)
@@ -55,20 +55,22 @@ namespace BachHoaTH.Controllers
                     .OrderByDescending(x => x.DateCreated)
                     .ToList();
             }
-            else if ( catId!=null)
+            else if (catId != null)
             {
                 ls = _context.Products.AsNoTracking()
                     .Where(x => x.CatId == catId)
                     .OrderByDescending(x => x.DateCreated)
                     .ToList();
             }
-            if(search!=null){
-ViewBag.searchVal =search ;
+            if (search != null)
+            {
+                ViewBag.searchVal = search;
             }
-              if(catId!=null){
- ViewBag.catIdVal =catId ;
-              }
-             
+            if (catId != null)
+            {
+                ViewBag.catIdVal = catId;
+            }
+
             return View(ls);
 
 
@@ -91,6 +93,10 @@ ViewBag.searchVal =search ;
                     .Take(4)
                     .ToList();
                 ViewBag.SanPham = lsProduct;
+                int authorId = (int)(product.AuthorId);
+                var author = _context.Customers.Where(x =>x.CustomerId==authorId).FirstOrDefault();
+
+                ViewBag.Author = author;
                 return View(product);
             }
             catch

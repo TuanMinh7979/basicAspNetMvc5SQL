@@ -1,0 +1,60 @@
+﻿@model IEnumerable<BachHoaTH.Models.Product>
+@{
+    ViewData["Title"] = "Tin da dang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+@section Styles {
+
+}
+
+
+<main class="main-content container">
+
+        <h3>Sản phẩm đã đăng</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Tên sản phẩm</th>
+                    <th scope="col">Hình ảnh</th>
+                    <th scope="col">Giá</th>
+                    <th scope="col">Tình trạng</th>
+                    <th scope="col">Ngày đăng</th>
+                </tr>
+            </thead>
+            <tbody id="records_table">
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ProductId</td>
+                        <td>@item.ProductName</td>
+                        <td>
+                            
+                                <img class="img-fluid rounded" src="~/images/products/@item.Thumb" style="max-width: 60px" alt="">
+                               
+                           
+                        </td>
+                       
+                        <td>@item.Price.Value.ToString("#,##0") VNĐ</td>
+                        <td>Đang rao bán</td>
+                        <td>@(item.DateCreated) VNĐ</td>
+            
+
+                    </tr>
+                }
+            }
+        </tbody>
+        </table>
+
+</main>
+
+
+<!-- Modal -->
+@section Scripts {
+<script type="text/javascript" src="js/Dangtin.js"></script>
+}
+<!-- Main Content Area End Here -->

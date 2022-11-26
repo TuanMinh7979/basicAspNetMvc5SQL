@@ -4,7 +4,12 @@
 // if (lidx > 6) {
 //   oriUrl = curUrl.substring(0, curUrl.lastIndexOf("/"));
 // }
-
+var startSpin = function () {
+  $("#overlay").fadeIn();
+}
+var stopSpin = function () {
+  $("#overlay").fadeOut();
+}
 function renderProduct(rs, purl) {
   let newList = [];
   rs.map((item) => {
@@ -128,12 +133,7 @@ $(function () {
     });
   });
 
-  function startSpin() {
-    $("#overlay").fadeIn();
-  }
-  function stopSpin() {
-    $("#overlay").fadeOut();
-  }
+
 
 
 });

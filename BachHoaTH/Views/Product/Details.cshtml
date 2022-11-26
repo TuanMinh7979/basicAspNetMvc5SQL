@@ -76,18 +76,17 @@
                 <div class="author-left">
 
                     <p style="font-weight: bold;"> Người bán:</p>
-                    <a href="/tin-cung-nguoi-dang/66800-0" title="Xem tin đăng của Nội Thất Hòa Hưng" rel="nofollow">
+                    <a href="/tin-cung-nguoi-dang/66800-0" title="Xem tin đăng" rel="nofollow">
 
-                        <img src="https://tvovermind.com/wp-content/uploads/2017/12/38424-BossBaby.1200w.tn-1.jpg"
-                            alt="">
-                        <span> Nội Thất Hòa Hưng</span>
+                        <img src="~/images/user/@ViewBag.Author.Avatar" alt="">
+                        <span> @(ViewBag.Author.FullName)</span>
                     </a>
                 </div>
                 <div id="viewphone" class="author-right">
                     <i class="fa fa-phone" aria-hidden="true"></i>
                     <span>
 
-                        01655971019
+                        @(ViewBag.Author.Phone)
                     </span>
                 </div>
             </div>

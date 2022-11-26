@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 
@@ -50,9 +51,45 @@ namespace BachHoaTH.Controllers
         [Route("/dang-tin")]
         public IActionResult Dangtin(int? id)
         {
+
             return View();
 
         }
+
+
+        [HttpGet]
+        [Route("/tin-da-dang")]
+        public IActionResult ShowTinDang()
+        {
+            var taikhoanID = HttpContext.Session.GetString("CustomerId");
+            var taikhoanId = Int32.Parse(taikhoanID);
+             var ls = _context.Products.AsNoTracking()
+                .Where(p=>p.AuthorId==taikhoanId)
+                     .OrderByDescending(x => x.DateCreated)
+                     .ToList();
+        
+            return View(ls);
+
+        }
+
+
+        [HttpGet]
+        [Route("/ca-nhan")]
+        public IActionResult ShowThongTinSeller(int? id)
+        {
+            var taikhoanID = HttpContext.Session.GetString("CustomerId");
+            var person = _context.Customers
+                       .AsNoTracking()
+
+                       .Where(x => x.CustomerId == Int32.Parse(taikhoanID)).FirstOrDefault();
+
+            return View(person);
+
+        }
+
+   
+
+
 
         [HttpPost]
         [Route("/api/dang-tin")]

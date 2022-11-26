@@ -5,6 +5,14 @@ if (lidx > 6) {
     oriUrl = curUrl.substring(0, curUrl.lastIndexOf("/"));
 }
 
+
+let phoneStatus = {
+    "0": "Mới",
+    "1": "Đã sử dụng",
+    "2": "Đã sửa chữa"
+}
+
+
 $(document).ready(function () {
     let productId = $("#idHInp").val();
     let kvValStr = $("#kvHInp").val();
@@ -14,7 +22,7 @@ $(document).ready(function () {
 
 
     let slideImgs = []
-    slideImgs.push(oriUrl + "/images/products/" + thumb)
+    slideImgs.push(window.location.origin + "/images/products/" + thumb)
     $.ajax({
         url: `/api/getcateview/${catId}`,
         type: "GET",
@@ -37,7 +45,7 @@ $(document).ready(function () {
 
         success: function (res) {
             res.forEach(item => {
-                slideImgs.push(oriUrl + "/images/products/" + item.fileName)
+                slideImgs.push(window.location.origin + "/images/products/" + item.fileName)
             })
 
 
@@ -121,35 +129,6 @@ $(document).ready(function () {
 
 
 
-    // $(".album-slider").slick({
-    //     arrows: true,
-    //     centerMode: true,
-    //     centerPadding: "60px",
-    //     slidesToShow: 2,
-    //     slidesToScroll: 1,
-    //     infinite: true,
 
-    //     prevArrow: `<button type='button' class='slick-prev slick-arrow'><ion-icon name="arrow-back-outline"></ion-icon></button>`,
-    //     nextArrow: `<button type='button' class='slick-next slick-arrow'><ion-icon name="arrow-forward-outline"></ion-icon></button>`,
 
-    //     responsive: [
-    //         {
-    //             breakpoint: 1025,
-    //             settings: {
-    //                 slidesToShow: 3,
-    //                 arrows: true,
-    //             },
-    //         },
-    //         {
-    //             breakpoint: 480,
-    //             settings: {
-    //                 slidesToShow: 2,
-    //                 arrows: true,
-    //                 infinite: false,
-    //             },
-    //         },
-    //     ],
-    //     // autoplay: true,
-    //     // autoplaySpeed: 1000,
-    // });
 });

@@ -31,7 +31,8 @@
                         <li class="nav-item">
                             <a class="nav-link" id="account-address-tab" data-bs-toggle="tab" href="#account-address"
                                 role="tab" aria-controls="account-address" aria-selected="false">Cập nhật địa chỉ</a>
-                        </li>
+                        </li> 
+                     
                         <li class="nav-item">
                             <a class="nav-link" id="account-logout-tab" href="/dang-xuat.html" role="tab"
                                 aria-selected="false">Đăng xuất</a>
@@ -61,7 +62,8 @@
                             <div class="myaccount-address">
                                 @await Html.PartialAsync("_AddressPartialView.cshtml", updateAddress)
                             </div>
-                        </div>
+                        </div>  
+              
                         <div class="tab-pane fade" id="account-details" role="tabpanel"
                             aria-labelledby="account-details-tab">
                             @await Html.PartialAsync("_ChangePasswordPartialView", changePassword)
