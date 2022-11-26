@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -56,7 +57,7 @@ namespace BachHoaTH.Controllers
                 if (khachang != null)
                     return Json(data: "Email: " + Email + "đã được sử dụng<br/>");
                 return Json(data: true);
-            } 
+            }
             catch
             {
                 return Json(data: true);
@@ -74,9 +75,9 @@ namespace BachHoaTH.Controllers
                 {
                     var lsDonhang = _context.Orders
                         .AsNoTracking()
-                        .Include(x=>x.TransactStatus)
+                        .Include(x => x.TransactStatus)
                         .Where(x => x.CustomerId == khachhang.CustomerId)
-                        .OrderByDescending(x=>x.OrderDate)
+                        .OrderByDescending(x => x.OrderDate)
                         .ToList();
                     ViewBag.DonHang = lsDonhang;
                     return View(khachhang);
@@ -136,7 +137,7 @@ namespace BachHoaTH.Controllers
                     }
                     catch
                     {
-                     
+
                         return RedirectToAction("DangKyTaiKhoan", "Accounts");
                     }
                 }
@@ -152,8 +153,20 @@ namespace BachHoaTH.Controllers
         }
 
         [AllowAnonymous]
-        [Route("login",Name ="DangNhap")]
+        [Route("login", Name = "DangNhap")]
         public IActionResult Login(string returnUrl = null)
+        {
+            var taikhoanID = HttpContext.Session.GetString("CustomerId");
+            if (taikhoanID != null)
+            {
+                return RedirectToAction("Dashboard", "Accounts");
+            }
+            return View();
+        }
+
+        [AllowAnonymous]
+        [Route("loginAdmin", Name = "DangNhapAdmin")]
+        public IActionResult ShowAdminLogin(string returnUrl = null)
         {
             var taikhoanID = HttpContext.Session.GetString("CustomerId");
             if (taikhoanID != null)
@@ -174,11 +187,13 @@ namespace BachHoaTH.Controllers
                 {
                     bool isEmail = Utilities.IsValidEmail(customer.UserName);
                     if (!isEmail) return View(customer);
-                    var khachang = _context.Customers.AsNoTracking().SingleOrDefault(x => x.Email.Trim() == customer.UserName);
-                    if (khachang == null) {
-                        _notifyService.Warning("Đăng nhập thất bại, hãy tạo tài khoản mới");
-                        return RedirectToAction("DangKyTaiKhoan");
-                    } 
+                    Debug.WriteLine(customer.UserName);
+                    var khachang = _context.Customers.AsNoTracking().SingleOrDefault(x => x.Email.Trim() == customer.UserName.Trim());
+                    if (khachang == null)
+                    {
+                        _notifyService.Warning("Đăng nhập thất bại, thử lại");
+                        return RedirectToAction("DangNhap");
+                    }
 
                     string pass = (customer.Password + khachang.Salt.Trim()).ToMD5();
                     if (khachang.Password != pass)
@@ -204,6 +219,7 @@ namespace BachHoaTH.Controllers
                     await HttpContext.SignInAsync(claimsPrincipal);
                     _notifyService.Success("Đăng nhập thành công");
 
+
                     return RedirectToAction("Dashboard", "Accounts");
                 }
             }
@@ -215,12 +231,78 @@ namespace BachHoaTH.Controllers
             return View(customer);
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("loginAdmin", Name = "DangNhapAdmin")]
+        public async Task<IActionResult> LoginAdmin(LoginViewModel customer, string returnUrl = null)
+        {
+         
+            Debug.WriteLine("-----------------------------(" + customer.UserName);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    bool isEmail = Utilities.IsValidEmail(customer.UserName);
+                    if (!isEmail) return View(customer);
+                    Debug.WriteLine("-----------------------------("+customer.UserName);
+                    var accountAdmin = _context.Accounts.AsNoTracking().SingleOrDefault(x => x.Email.Trim() == customer.UserName.Trim());
+                    if (accountAdmin == null)
+                    {
+                        _notifyService.Warning("Đăng nhập admin thất bại, thử lại");
+                        return RedirectToAction("LoginAdmin");
+                    }
+
+                    string pass = (customer.Password + accountAdmin.Salt.Trim()).ToMD5();
+                    if (accountAdmin.Password != pass)
+                    {
+                        _notifyService.Warning("Sai thông tin đăng nhập!");
+                        return View(customer);
+                    }
+
+
+                    //lưu sesion makh
+                    var accountCus = _context.Customers.AsNoTracking().SingleOrDefault(x => x.Email.Trim() == customer.UserName);
+                    HttpContext.Session.SetString("CustomerId", accountCus.CustomerId.ToString());
+                    HttpContext.Session.SetString("isAdmin", "true");
+                   
+
+
+                    var taikhoanID = HttpContext.Session.GetString("CustomerId");
+                    //identity
+                    var claims = new List<Claim>
+                        {
+                            new Claim(ClaimTypes.Name, accountCus.FullName),
+                            new Claim("CustomerId", accountCus.CustomerId.ToString())
+                        };
+                    ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "login");
+                    ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+                    await HttpContext.SignInAsync(claimsPrincipal);
+                    _notifyService.Success("Đăng nhập thành công");
+
+
+                    return Redirect("/admin/home");
+                }
+            }
+            catch
+            {
+                _notifyService.Warning("Đăng nhập thất bại, hãy tạo tài khoản mới");
+                return RedirectToAction("DangKyTaiKhoan", "Accounts");
+            }
+            return View(customer);
+        }
+
+
+
+
+
+
         [HttpGet]
-        [Route("dang-xuat.html", Name ="Logout")]
+        [Route("dang-xuat.html", Name = "Logout")]
         public IActionResult Logout()
         {
             HttpContext.SignOutAsync();
             HttpContext.Session.Remove("CustomerId");
+            HttpContext.Session.Remove("isAdmin");
             return RedirectToAction("Index", "Home");
         }
 
@@ -273,15 +355,15 @@ namespace BachHoaTH.Controllers
                 if (ModelState.IsValid)
                 {
                     var taikhoan = _context.Customers.Find(Convert.ToInt32(taikhoanID));
-                    if (taikhoan == null) return RedirectToAction("Login", "Accounts"); 
-                        string addressnew = model.Address.Trim();
-                        taikhoan.Address = addressnew;
-                        _context.Update(taikhoan);
-                        _context.SaveChanges();
-                        _notifyService.Success("Cập nhật địa chỉ thành công");
-                        return RedirectToAction("Dashboard", "Accounts");
-                    }
-                
+                    if (taikhoan == null) return RedirectToAction("Login", "Accounts");
+                    string addressnew = model.Address.Trim();
+                    taikhoan.Address = addressnew;
+                    _context.Update(taikhoan);
+                    _context.SaveChanges();
+                    _notifyService.Success("Cập nhật địa chỉ thành công");
+                    return RedirectToAction("Dashboard", "Accounts");
+                }
+
             }
             catch
             {
@@ -292,6 +374,6 @@ namespace BachHoaTH.Controllers
             _notifyService.Warning("Cập nhật mật khẩu không thành công");
             return RedirectToAction("Dashboard", "Accounts");
         }
-        
+
     }
 }

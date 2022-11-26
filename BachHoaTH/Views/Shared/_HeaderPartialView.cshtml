@@ -1,4 +1,6 @@
-﻿<header class="main-header_area position-relative">
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+<header class="main-header_area position-relative">
     <div class="header-top border-bottom d-none d-md-block">
         <div class="container">
             <div class="row align-items-center">
@@ -37,7 +39,7 @@
                                             id="settingButton" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="pe-7s-users" style="color: white; font-weight:bold"></i>
                                     </button>
-                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingButton">
+                                    <ul class="dropdown-menu dropdown-menu-end" id="accountUl" aria-labelledby="settingButton">
                                         @if (User.Identity.IsAuthenticated)
                                         {
 
@@ -48,6 +50,14 @@
                                                 </a>
                                             </li>
                                             <li><a class="dropdown-item" href="/dang-xuat.html">Đăng xuất</a></li>
+                                            if (HttpContextAccessor.HttpContext.Session.GetString("isAdmin") == "true")
+                                            {
+                                                <li>
+                                                    <a class="dropdown-item" href="/admin/home">
+                                                        Admin page
+                                                    </a>
+                                                </li>
+                                            }
 
 
                                         }
@@ -57,6 +67,7 @@
                                         {
                                             <li><a class="dropdown-item" href="/dang-ky.html">Đăng ký</a></li>
                                             <li><a class="dropdown-item" href="/login">Đăng nhập</a></li>
+                                            <li><a class="dropdown-item" href="/loginAdmin">Đăng nhập Admin</a></li>
                                         }
                                     </ul>
 
@@ -87,7 +98,7 @@
                                     </li>
                                 }
 
-        @if (User.Identity.IsAuthenticated)
+                                @if (User.Identity.IsAuthenticated)
 
 
                                 {
@@ -104,7 +115,7 @@
                                     <li class="">
 
                                         <a style="color: white; font-weight: 500" class="btn" href="/login">
-                                           TIN ĐÃ ĐĂNG
+                                            TIN ĐÃ ĐĂNG
                                         </a>
                                     </li>
                                 }
